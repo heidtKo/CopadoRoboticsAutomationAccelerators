@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "CopadoRoboticsAutomationAccelerators",
+      "default": true
+    }
+  ],
+  "name": "CopadoRoboticAutomationAccelerators",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "61.0"
+}
