@@ -1,0 +1,9 @@
+wget https://nodejs.org/dist/v22.14.0/node-v22.14.0-linux-x64.tar.xz
+mkdir ~/nodejs
+tar xJf node-v22.14.0-linux-x64.tar.xz -C ~/nodejs --strip-components 1
+export PATH=~/nodejs/bin:$PATH
+PATH=~/nodejs/bin:$PATH
+~/nodejs/bin/node --version
+~/nodejs/bin/npm --version
+npm install @salesforce/cli --global
+sf --version

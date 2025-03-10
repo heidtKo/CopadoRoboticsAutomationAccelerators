@@ -1,0 +1,22 @@
+
+#
+# QEditor test suite configuration
+#
+
+# Make sure to include at least one space after each configuration option
+
+name: QEditor / Copado Robotic Testing configuration
+description: Configuration for Copado Robotic Testing integration
+version: 0.0.1
+
+# Specify the URL to your test suite in Copado Robotic Testing:
+#
+# In AU: https://au-robotic.copado.com/robots/{PROJECT_ID}/r/{ROBOT_ID}/suite/{SUITE_ID}
+# In EU: https://eu-robotic.copado.com/robots/{PROJECT_ID}/r/{ROBOT_ID}/suite/{SUITE_ID}
+# In US: https://robotic.copado.com/robots/{PROJECT_ID}/r/{ROBOT_ID}/suite/{SUITE_ID}
+# In SG: https://sg-robotic.copado.com/robots/{PROJECT_ID}/r/{ROBOT_ID}/suite/{SUITE_ID}
+#
+# For example:
+# url: https://robotic.copado.com/robots/123/r/456/suite/789
+
+url:
