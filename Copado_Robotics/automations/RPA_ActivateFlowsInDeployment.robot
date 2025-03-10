@@ -14,7 +14,7 @@ Suite Teardown                  Close All Browsers
 *** Variables ***
 #sample variable values help during development
 ${input_string}                 {"promotionId": "a0tQH0000095aAaYAI", "totalFlows": 2, "flows": [{"type": "Flow", "apiName": "my_flow"}, {"type": "Flow", "apiName": "ctx_rule_1"}]}
-${org_session_token}            00DDa000000AOwV!AQEAQPHIxSrzPwfLg5s4z3rN6dbQIKVq8TZCUUkof7Aj2Q_pKfUclVCTnOWtirs6UEvRnsFywCOjfFOIZP7eawgCRRIyeItU
+${org_session_token}            00DDa000000AOwV!AQEAQAVjkpy4X4CCXLyTTNDYmUTuz74nlxrSE0j6QgWt7qJyC0CZwTueV4de8jfQTKX0QEi0VqOpNVWnMPDei8Eds4bDpjM_
 ${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforce.com
 ${alias}                        automation_environment
 
