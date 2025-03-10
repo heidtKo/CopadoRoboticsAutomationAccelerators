@@ -3,7 +3,6 @@ Documentation                   New test suite
 Library                         QVision
 Library                         QForce
 Library                         QWeb
-Library                         SeleniumLibrary
 Library                         OperatingSystem
 Library                         Collections
 Library                         JSONLibrary
@@ -116,7 +115,7 @@ Activate Flows In Deployment
         #skip otherwise
         ${first_cell}=          GetCellText                 r1c1                        anchor=1
         ${first_row_not_active}=                            Evaluate                    'Activate' in '''${first_cell}'''
-        ${deactivate_exists_on_page}=                       Is Text                     Deactivate
+        ${deactivate_exists_on_page}=                       QWeb.IsText                     Deactivate
 
         IF                      ${deactivate_exists_on_page} and ${first_row_not_active}
             QWeb.ClickText           Activate                    anchor=Action
