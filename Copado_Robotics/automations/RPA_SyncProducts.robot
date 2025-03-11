@@ -6,7 +6,7 @@ Library                         QWeb
 Library                         OperatingSystem
 Library                         Collections
 Library                         JSONLibrary
-Resource                        ../resources/utility.resource    
+Resource                        ../resources/utility.resource
 
 Suite Setup                     Open Browser                about:blank                 chrome
 Suite Teardown                  Close All Browsers
@@ -44,4 +44,4 @@ Activate Flows In Deployment
     Log                         ${frontdoor_url}
     Log                         ${flow_redirect}
     Go To                       ${start_url}                timeout=2
-    Sleep                       10s              5s
+    Sleep                       10s                         5s
