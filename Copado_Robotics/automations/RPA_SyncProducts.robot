@@ -35,3 +35,13 @@ Sync Products
     #Authenticate current org
     ${org_session_token_shell}=                             Catenate                    '                           ${org_session_token}    '
     ${auth_result}=             sf cli authenticate environment                         ${instance_url}             ${org_session_token_shell}    ${alias}
+    
+    #Log in
+    ${frontdoor_url}=           Catenate                    ${instance_url}             /secur/frontdoor.jsp?sid=                           ${org_session_token}
+    ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/Flows/home
+    ${start_url}=               Catenate                    ${frontdoor_url}            ${flow_redirect}
+    ${start_url}=               Remove String               ${start_url}                ${SPACE}
+    Log                         ${frontdoor_url}
+    Log                         ${flow_redirect}
+    Go To                       ${start_url}                timeout=2
+    Sleep                       5s
