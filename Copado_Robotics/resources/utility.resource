@@ -27,14 +27,14 @@ sf cli authenticate environment
 
     ${result_status}=         Set Variable                ${org_details_json["status"]}
     IF                        "${result_status}" != "0"
-        Log                   Command failed. Message: ${org_details_json["message"]}             level=WARN
+        Log                   Command failed. Message: ${org_details_json["message"]}                             level=WARN
         Fatal Error           Connection verification failed.
     ELSE
         ${connected_status}=                              Set Variable                ${org_details_json["result"]["connectedStatus"]}
         Log                   Connection Status: ${connected_status}
 
         IF                    "${connected_status}" != "Connected"
-            Log               Connection status is not "Connected". Current status: ${connected_status}    level=WARN
+            Log               Connection status is not "Connected". Current status: ${connected_status}           level=WARN
             Fatal Error       Connection verification failed. Status: ${connected_status}
         END
     END
@@ -48,17 +48,16 @@ sf cli query data
 
 json sf cli response string to dict
     [Arguments]               ${JSON_STRING}
-    ${JSON_STRING} =          Replace String              ${JSON_STRING}              \\n         \\\\n
+    ${JSON_STRING} =          Replace String              ${JSON_STRING}              \\n                         \\\\n
     ${JSON_STRING}            Set Variable                { ${JSON_STRING.split('{', 1)[1].rsplit('}', 1)[0]}}
     ${JSON_DICT} =            Evaluate                    json.loads('''${JSON_STRING}''', strict=${FALSE})
     RETURN                    ${JSON_DICT}
 
 frontdoor login
-    [Arguments]    ${base_url}    ${token}
-    ${frontdoor_url}=           Catenate                    ${base_url}             /secur/frontdoor.jsp?sid=                           ${token}
-    ${frontdoor_url}=               Remove String               ${frontdoor_url}                ${SPACE}
-    Log                         ${frontdoor_url}
-    Go To                       ${frontdoor_url}                timeout=2
-    Sleep                       4s
-    RETURN                      ${frontdoor_url}
-    
+    [Arguments]               ${base_url}                 ${token}
+    ${frontdoor_url}=         Catenate                    ${base_url}                 /secur/frontdoor.jsp?sid=               ${token}
+    ${frontdoor_url}=         Remove String               ${frontdoor_url}            ${SPACE}
+    Log                       ${frontdoor_url}
+    Go To                     ${frontdoor_url}            timeout=2
+    Sleep                     4s
+    RETURN                    ${frontdoor_url}
