@@ -14,12 +14,12 @@ Suite Teardown                  Close All Browsers
 *** Variables ***
 #sample variable values help during development
 ${input_string}                 {"promotionId": "a0tQH0000095aAaYAI", "totalFlows": 2, "flows": [{"type": "Flow", "apiName": "my_flow"}, {"type": "Flow", "apiName": "ctx_rule_1"}]}
-${org_session_token}            00DS8000007THfo!AQEAQBWF8ZWcDqC5R1lXhhZ_GhhS3wlOW9ABQQs3s276RcvVvfWd5C4fajEzglnBm2tbUvnGI4Feztz3ocEZh_g0h56aXuZ5
+${org_session_token}            00DDa000000AOwV!AQEAQCNr5eKoITY1Zu.mdkdrLiGvBTnIciERdfJenr0rDDNdu7LqeLrLXEN4rNVW.1Ski_CJa95cy.Q0A4OHOQ9J_.cCeb6K
 ${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforce.com
 ${alias}                        automation_environment
 
 *** Test Cases ***
-Sync Products
+Activate Flows In Deployment
     [Documentation]             In this case we are given a list of flows in a current Copado CICD promotion. The list is only API names, so we need to get the UI Labels of those flows first, using the Salesforce CLI. Afterwards, the automation continues in the UI.
     [Tags]                      poc
     ## Use API to get flow labels.
@@ -34,9 +34,8 @@ Sync Products
 
     #Authenticate current org
     ${org_session_token_shell}=                             Catenate                    '                           ${org_session_token}    '
-    Log To Console                        ${org_session_token_shell}
     ${auth_result}=             sf cli authenticate environment                         ${instance_url}             ${org_session_token_shell}    ${alias}
-    
+
     #Log in
     ${frontdoor_url}=           Catenate                    ${instance_url}             /secur/frontdoor.jsp?sid=                           ${org_session_token}
     ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/Flows/home
