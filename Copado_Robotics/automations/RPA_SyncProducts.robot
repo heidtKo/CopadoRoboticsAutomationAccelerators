@@ -48,5 +48,5 @@ Activate Flows In Deployment
 
     Go To                       ${instance_url}/lightning/setup/CorePricingSetup/home
     Sleep                       5s
-    Click Text    Sync                        anchor=Sync Pricing Data
+    Click Element    copado=button:Sync
     Click Text    Confirm
