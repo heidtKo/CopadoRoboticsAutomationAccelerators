@@ -37,7 +37,7 @@ Sync Products
 
     #Log in
     ${frontdoor_url}=           Catenate                    ${instance_url}             /secur/frontdoor.jsp?sid=                           ${org_session_token}
-    ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/Flows/home
+    ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/SetupOneHome/home
     ${start_url}=               Catenate                    ${frontdoor_url}            ${flow_redirect}
     ${start_url}=               Remove String               ${start_url}                ${SPACE}
     Log                         ${frontdoor_url}
