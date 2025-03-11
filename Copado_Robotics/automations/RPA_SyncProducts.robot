@@ -44,4 +44,4 @@ Activate Flows In Deployment
     Log                         ${frontdoor_url}
     Log                         ${flow_redirect}
     Go To                       ${start_url}                timeout=2
-    Sleep                       5s
+    Sleep                       10s              5s
