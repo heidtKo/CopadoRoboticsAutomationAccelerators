@@ -48,5 +48,5 @@ Activate Flows In Deployment
 
     Go To                       ${instance_url}/lightning/setup/CorePricingSetup/home
     Sleep                       5s
-    QWeb.ClickText    Sync                        anchor=Sync Pricing Data
-    QWeb.ClickText    Confirm
+    Click Text    Sync                        anchor=Sync Pricing Data
+    Click Text    Confirm
