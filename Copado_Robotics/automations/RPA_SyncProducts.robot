@@ -45,3 +45,8 @@ Activate Flows In Deployment
     Log                         ${flow_redirect}
     Go To                       ${start_url}                timeout=2
     Sleep                       10s                         5s
+
+    Go To                       ${instance_url}/lightning/setup/CorePricingSetup/home
+
+    QWeb.ClickText    Sync
+    QWeb.ClickText    Confirm
