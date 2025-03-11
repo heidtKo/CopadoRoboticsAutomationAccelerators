@@ -72,17 +72,9 @@ Activate Flows In Deployment
     # Login to Salesforce using the session id and redirect to the list of flows directly. Should save some hassle.
     # this step can be skipped, as we could navigate to the flows directly, but it doesn't add a lot of execution time, and helps to understand potential errors while not adding too much execution time
     # also, it makes later URLs less complicated.
-    ${frontdoor_url}=           Catenate                    ${instance_url}             /secur/frontdoor.jsp?sid=                           ${org_session_token}
-    ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/Flows/home
-    ${start_url}=               Catenate                    ${frontdoor_url}            ${flow_redirect}
-    ${start_url}=               Remove String               ${start_url}                ${SPACE}
-    Log                         ${frontdoor_url}
-    Log                         ${flow_redirect}
-    Go To                       ${start_url}                timeout=2
-    Sleep                       10s
-    
     frontdoor login             ${instance_url}             ${org_session_token}
-    Go To                       ${instance_url}/lightning/setup/Flows/home            
+    Go To                       ${instance_url}/lightning/setup/Flows/home 
+    Sleep                       5s           
 
     ## let's try the following approach which should limit the number of UI interactions and therefore the number of potential errors improving performance along the way
     # each flow has a detail page with a specific URL
