@@ -80,6 +80,9 @@ Activate Flows In Deployment
     Log                         ${flow_redirect}
     Go To                       ${start_url}                timeout=2
     Sleep                       10s
+    
+    frontdoor login             ${instance_url}             ${org_session_token}
+    Go To                       ${instance_url}/lightning/setup/Flows/home            
 
     ## let's try the following approach which should limit the number of UI interactions and therefore the number of potential errors improving performance along the way
     # each flow has a detail page with a specific URL
