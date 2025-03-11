@@ -52,3 +52,13 @@ json sf cli response string to dict
     ${JSON_STRING}            Set Variable                { ${JSON_STRING.split('{', 1)[1].rsplit('}', 1)[0]}}
     ${JSON_DICT} =            Evaluate                    json.loads('''${JSON_STRING}''', strict=${FALSE})
     RETURN                    ${JSON_DICT}
+
+frontdoor login
+    [Arguments]    ${base_url}    ${token}
+    ${frontdoor_url}=           Catenate                    ${base_url}             /secur/frontdoor.jsp?sid=                           ${token}
+    ${frontdoor_url}=               Remove String               ${frontdoor_url}                ${SPACE}
+    Log                         ${frontdoor_url}
+    Go To                       ${frontdoor_url}                timeout=2
+    Sleep                       4s
+    RETURN                      ${frontdoor_url}
+    
