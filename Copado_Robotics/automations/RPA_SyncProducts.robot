@@ -48,5 +48,5 @@ Activate Flows In Deployment
 
     Go To                       ${instance_url}/lightning/setup/CorePricingSetup/home
     Sleep                       5s
-    Click Element    copado=button:Sync
+    Click Element               xpath=//button[contains(@class, 'slds-button_neutral') and contains(text(), 'Sync')]               
     Click Text    Confirm
