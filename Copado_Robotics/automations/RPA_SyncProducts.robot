@@ -47,5 +47,5 @@ Sync Products
 
     Go To                       ${instance_url}/lightning/setup/CorePricingSetup/home
     Sleep                       5s
-    Click Element               xpath=//button[contains(@class, 'slds-button_neutral') and contains(text(), 'Sync')]               
-    Click Text    Confirm
+    Click Element               xpath=//button[contains(@class, 'slds-button_neutral') and contains(text(), 'Sync')]
+    Click Text                  Confirm
