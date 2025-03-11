@@ -34,6 +34,7 @@ Sync Products
 
     #Authenticate current org
     ${org_session_token_shell}=                             Catenate                    '                           ${org_session_token}    '
+    Log To Console                        ${org_session_token_shell}
     ${auth_result}=             sf cli authenticate environment                         ${instance_url}             ${org_session_token_shell}    ${alias}
     
     #Log in
