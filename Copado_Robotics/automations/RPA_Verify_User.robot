@@ -13,8 +13,8 @@ Suite Teardown                  Close All Browsers
 
 *** Variables ***
 #sample variable values help during development
-${org_session_token}            00DDa000000AOwV!AQEAQKjHDfpTlurnnx7KSzT4Rj2GqjAFO8LH5blrhrb25a83NUVXcP..j.mkBnIS10n8BMDSPUfUiPwCNTR62Y88ZEqeHT9j
-${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforce.com
+${org_session_token}            
+${instance_url}                 
 ${alias}                        automation_environment
 
 *** Test Cases ***
