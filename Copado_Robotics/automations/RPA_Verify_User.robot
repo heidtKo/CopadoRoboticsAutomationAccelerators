@@ -18,3 +18,24 @@ ${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforc
 ${alias}                        automation_environment
 
 *** Test Cases ***
+    ${sf_version}=              sf cli version
+    Log                         ${sf_version}
+    ${sf_cli}=                  Evaluate                    """${sf_version}""".startswith("@salesforce/cli")
+    IF                          ${sf_cli} == ${FALSE}
+        Log                     No salesforce cli has been installed. abort
+        Fatal Error
+    END
+
+    #Authenticate current org
+    ${org_session_token_shell}=                             Catenate                    '                           ${org_session_token}    '
+    ${auth_result}=             sf cli authenticate environment                         ${instance_url}             ${org_session_token_shell}    ${alias}
+
+    #Log in
+    ${frontdoor_url}=           Catenate                    ${instance_url}             /secur/frontdoor.jsp?sid=                           ${org_session_token}
+    ${flow_redirect}=           Set Variable                &retURL=/lightning/setup/SetupOneHome/home
+    ${start_url}=               Catenate                    ${frontdoor_url}            ${flow_redirect}
+    ${start_url}=               Remove String               ${start_url}                ${SPACE}
+    Log                         ${frontdoor_url}
+    Log                         ${flow_redirect}
+    Go To                       ${start_url}                timeout=2
+    Sleep                       5s
