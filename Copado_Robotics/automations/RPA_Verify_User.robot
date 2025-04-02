@@ -41,9 +41,9 @@ Verify User
     Log                         ${flow_redirect}
     Go To                       ${start_url}                timeout=2
     Sleep                       5s
-    
 
-    ClickText    View profile
-    ClickText    Settings
-    ClickText    kheidt+pre_s23-fm46@force.com.s23g3dev1    anchor=\nUsername
+
+    ClickText                   View profile
+    ClickText                   Settings
+    VerifyText                  Username
 
