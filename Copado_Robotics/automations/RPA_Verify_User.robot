@@ -18,6 +18,8 @@ ${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforc
 ${alias}                        automation_environment
 
 *** Test Cases ***
+Verify User
+    [Documentation]             In this case we are given a list of flows in a current Copado CICD promotion. The list is only API names, so we need to get the UI Labels of those flows first, using the Salesforce CLI. Afterwards, the automation continues in the UI.
     ${sf_version}=              sf cli version
     Log                         ${sf_version}
     ${sf_cli}=                  Evaluate                    """${sf_version}""".startswith("@salesforce/cli")
