@@ -19,6 +19,11 @@ ${instance_url}                 https://copado51--s23g3dev1.sandbox.my.salesforc
 ${alias}                        automation_environment
 
 *** Test Cases ***
+Run Only With Proper Tag
+    [Tags]    only this tag
+    ${sf_version}=              sf cli version
+    Log                         ${sf_version}
+
 Activate Flows In Deployment
     [Documentation]             In this case we are given a list of flows in a current Copado CICD promotion. The list is only API names, so we need to get the UI Labels of those flows first, using the Salesforce CLI. Afterwards, the automation continues in the UI.
     [Tags]                      poc
