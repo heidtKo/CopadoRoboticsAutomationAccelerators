@@ -9,10 +9,12 @@ Library                       JSONLibrary
 
 *** Keywords ***
 sf cli version
+    [Documentation]           Simple command to verify if the cli is installed and which version
     ${result_string}          Run                         sf --version
     RETURN                    ${result_string}
 
 sf cli authenticate environment
+    [Documentation]           Authenticates the local salesforce cli for the target environment. This extra step will enable CLI and UI usage during execution.
     [Arguments]               ${instance_url}             ${token}                    ${alias}
     #auth first
     ${auth_command}=          Set Variable                SF_ACCESS_TOKEN=${token} sf org login access-token --no-prompt --instance-url ${instance_url} --alias ${alias} --json
@@ -41,12 +43,14 @@ sf cli authenticate environment
     RETURN                    ${connected_status}
 
 sf cli query data
+    [Documentation]           Executes a SOQL query against the currently authenticated environment.
     [Arguments]               ${query_string}             ${org_alias}
     ${query_result}=          Run                         sf data query --query '${query_string}' --json --target-org ${org_alias}
     ${query_json}=            json sf cli response string to dict                     ${query_result}
     RETURN                    ${query_json}
 
 json sf cli response string to dict
+    [Documentation]           Helper method to handle CLI responses. Not fully reliable yet, use with caution
     [Arguments]               ${JSON_STRING}
     ${JSON_STRING} =          Replace String              ${JSON_STRING}              \\n                         \\\\n
     ${JSON_STRING}            Set Variable                { ${JSON_STRING.split('{', 1)[1].rsplit('}', 1)[0]}}
@@ -54,10 +58,12 @@ json sf cli response string to dict
     RETURN                    ${JSON_DICT}
 
 frontdoor login
+    [Documentation]           Constructs a frontdoor url, which is used to log into your salesforce environment without 2FA.
+    ...                       Can be tweaked to accept dedicated target URLs to specific tabs
     [Arguments]               ${base_url}                 ${token}
     ${frontdoor_url}=         Catenate                    ${base_url}                 /secur/frontdoor.jsp?sid=               ${token}
     ${frontdoor_url}=         Remove String               ${frontdoor_url}            ${SPACE}
-    Log                       ${frontdoor_url}
+    #Log                       ${frontdoor_url}           #use during development. remove line once all works. this will print the URL with a session token.
     Go To                     ${frontdoor_url}            timeout=2
-    Sleep                     4s
+    Sleep                     3s                         #just in case. remove if not needed
     RETURN                    ${frontdoor_url}
