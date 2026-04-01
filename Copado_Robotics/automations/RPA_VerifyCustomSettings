@@ -1,0 +1,87 @@
+*** Settings ***
+Library                   QForce
+
+*** Variables ***
+# Authentication variables - these should be provided as external variables
+${CLIENT_ID}              # Consumer key from Connected App
+${CLIENT_SECRET}          # Consumer secret from Connected App
+${USERNAME}               # Salesforce username
+${PASSWORD}               # Salesforce password
+
+*** Test Cases ***
+Verify Data Change Event Conditions
+    [Documentation]       Verifies that Data Change Event Condition records have correct field values
+    ...                   based on their Object API Name
+    [Tags]                API    DataChangeEvents    Regression
+    
+    # Authenticate to Salesforce REST API
+    Client Authenticate    ${CLIENT_ID}    ${CLIENT_SECRET}    ${USERNAME}    ${PASSWORD}
+    
+    # Execute SOQL query to retrieve Data Change Event Condition records
+    ${query}=             Set Variable    SELECT Id,copado__Subscriber_Code__c,copado__Object_Api_Name__c,copado__Insert__c,copado__Update__c,copado__Undelete__c,copado__Delete__c,copado__Allow_All_Data__c FROM copado__Data_Change_Event_Condition__c
+    ${results}=           Query Records    ${query}
+    
+    # Verify that we got results
+    Should Not Be Empty    ${results}[records]    msg=No Data Change Event Condition records found
+    
+    # Iterate through each record and verify field values
+    FOR    ${record}    IN    @{results}[records]
+        ${object_name}=    Set Variable    ${record}[copado__Object_Api_Name__c]
+        
+        # Verify copado__epic__c
+        Run Keyword If    '${object_name}' == 'copado__epic__c'
+        ...    Verify Epic Fields    ${record}
+        
+        # Verify copado__sprint__c
+        Run Keyword If    '${object_name}' == 'copado__sprint__c'
+        ...    Verify Sprint Fields    ${record}
+        
+        # Verify copado__user_story__c
+        Run Keyword If    '${object_name}' == 'copado__user_story__c'
+        ...    Verify User Story Fields    ${record}
+        
+        # Verify copado__project__c
+        Run Keyword If    '${object_name}' == 'copado__project__c'
+        ...    Verify Project Fields    ${record}
+    END
+
+*** Keywords ***
+Verify Epic Fields
+    [Documentation]       Verifies field values for copado__epic__c records
+    [Arguments]           ${record}
+    Should Be Equal       ${record}[copado__Insert__c]           ${True}
+    Should Be Equal       ${record}[copado__Update__c]           ${True}
+    Should Be Equal       ${record}[copado__Undelete__c]         ${True}
+    Should Be Equal       ${record}[copado__Delete__c]           ${False}
+    Should Be Equal       ${record}[copado__Allow_All_Data__c]   ${False}
+    Log                   Epic record ${record}[Id] verified successfully
+
+Verify Sprint Fields
+    [Documentation]       Verifies field values for copado__sprint__c records
+    [Arguments]           ${record}
+    Should Be Equal       ${record}[copado__Insert__c]           ${True}
+    Should Be Equal       ${record}[copado__Update__c]           ${True}
+    Should Be Equal       ${record}[copado__Undelete__c]         ${True}
+    Should Be Equal       ${record}[copado__Delete__c]           ${False}
+    Should Be Equal       ${record}[copado__Allow_All_Data__c]   ${False}
+    Log                   Sprint record ${record}[Id] verified successfully
+
+Verify User Story Fields
+    [Documentation]       Verifies field values for copado__user_story__c records
+    [Arguments]           ${record}
+    Should Be Equal       ${record}[copado__Insert__c]           ${False}
+    Should Be Equal       ${record}[copado__Update__c]           ${True}
+    Should Be Equal       ${record}[copado__Undelete__c]         ${True}
+    Should Be Equal       ${record}[copado__Delete__c]           ${False}
+    Should Be Equal       ${record}[copado__Allow_All_Data__c]   ${False}
+    Log                   User Story record ${record}[Id] verified successfully
+
+Verify Project Fields
+    [Documentation]       Verifies field values for copado__project__c records
+    [Arguments]           ${record}
+    Should Be Equal       ${record}[copado__Insert__c]           ${True}
+    Should Be Equal       ${record}[copado__Update__c]           ${True}
+    Should Be Equal       ${record}[copado__Undelete__c]         ${True}
+    Should Be Equal       ${record}[copado__Delete__c]           ${False}
+    Should Be Equal       ${record}[copado__Allow_All_Data__c]   ${False}
+    Log                   Project record ${record}[Id] verified successfully
