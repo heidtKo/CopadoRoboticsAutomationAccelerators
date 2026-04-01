@@ -1,5 +1,15 @@
 *** Settings ***
-Library                   QForce
+Documentation                   New test suite
+Library                         QVision
+Library                         QForce
+Library                         QWeb
+Library                         OperatingSystem
+Library                         Collections
+Library                         JSONLibrary
+Resource                        ../resources/utility.resource
+
+Suite Setup                     Open Browser                about:blank                 chrome
+Suite Teardown                  Close All Browsers
 
 *** Variables ***
 # Authentication variables - these should be provided as external variables
