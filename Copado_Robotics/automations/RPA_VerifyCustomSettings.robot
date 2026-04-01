@@ -25,7 +25,8 @@ Verify Data Change Event Conditions
     [Tags]                API    DataChangeEvents    Regression
     
     # Authenticate to Salesforce REST API
-    Client Authenticate    ${client_id}    ${server_key}    ${persona_username}
+    JwtAuthenticate    ${client_id}    ${server_key}    ${persona_username}
+    JwtLogin           /lightning/setup/CustomSettings/home
     
     # Execute SOQL query to retrieve Data Change Event Condition records
     ${query}=             Set Variable    SELECT Id,copado__Subscriber_Code__c,copado__Object_Api_Name__c,copado__Insert__c,copado__Update__c,copado__Undelete__c,copado__Delete__c,copado__Allow_All_Data__c FROM copado__Data_Change_Event_Condition__c
