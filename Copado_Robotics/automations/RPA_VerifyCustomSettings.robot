@@ -13,10 +13,10 @@ Suite Teardown                  Close All Browsers
 
 *** Variables ***
 # Authentication variables - these should be provided as external variables
-${CLIENT_ID}              # Consumer key from Connected App
-${CLIENT_SECRET}          # Consumer secret from Connected App
-${USERNAME}               # Salesforce username
-${PASSWORD}               # Salesforce password
+${client_id}              # Consumer key from Connected App
+${server_key}          # Consumer secret from Connected App
+${persona_username}               # Salesforce username
+#${PASSWORD}               # Salesforce password
 
 *** Test Cases ***
 Verify Data Change Event Conditions
@@ -25,7 +25,7 @@ Verify Data Change Event Conditions
     [Tags]                API    DataChangeEvents    Regression
     
     # Authenticate to Salesforce REST API
-    Client Authenticate    ${CLIENT_ID}    ${CLIENT_SECRET}    ${USERNAME}    ${PASSWORD}
+    Client Authenticate    ${client_id}    ${server_key}    ${persona_username}
     
     # Execute SOQL query to retrieve Data Change Event Condition records
     ${query}=             Set Variable    SELECT Id,copado__Subscriber_Code__c,copado__Object_Api_Name__c,copado__Insert__c,copado__Update__c,copado__Undelete__c,copado__Delete__c,copado__Allow_All_Data__c FROM copado__Data_Change_Event_Condition__c
